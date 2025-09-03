@@ -7,6 +7,7 @@ function App() {
   const [audioUrl, setAudioUrl] = useState("")
   const [playingFileName, setPlayingFileName] = useState("")
   const [selectedFileArray, setSelectedFileArray] = useState([])
+  const [userEmail, setUserEmail] = useState("")
 
   const fileInputRef = useRef(null)
   const audioRef = useRef(null)
@@ -82,6 +83,8 @@ function App() {
           return;
         }
         currentUserRef.current = user.id
+        // Set email here
+        setUserEmail(user.email || 'No email associated with this account')
         downloadListAudioFiles();
       } catch (error) {
         console.error("Error checking authentication:", error);
@@ -208,9 +211,24 @@ function App() {
     };
   }, []);
 
+  const logOut = async() => {
+    const { error } = await supabase.auth.signOut()
+    if (error) {
+      console.error('Error signing out:', error)
+    } else {
+      window.location.href = '/auth'
+    }
+  }
+
   return (
     <div className='bg-[#22221E]'>
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex flex-col justify-center items-center h-screen">
+        <div className='absolute top-4 right-4 flex flex-col items-end'>
+          <p className="text-white">{userEmail}</p>
+          <button onClick={logOut} className='mb-[5%] text-white hover:opacity-90'>
+            Log Out
+          </button>
+        </div>
         <div className="flex flex-row bg-[#59ADFD] shadow-xl h-[60%] w-[70%] rounded-[10px] text-gray-800">
           <div className="bg-[#3F82FD] w-[25%] pl-4 pr-4 rounded-[10px]">
             <div className='flex flex-col gap-4'>
