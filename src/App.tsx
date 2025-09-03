@@ -27,7 +27,7 @@ function App() {
     const { data, error } = await supabase
       .storage
       .from('audio-storage')
-      .list(userId);
+      .list(`${userId}/audio`); 
       
     if (error) {
       console.error('Error fetching audio files:', error);
@@ -46,7 +46,7 @@ function App() {
         const { data: signedData, error: signedError } = await supabase
           .storage
           .from('audio-storage')
-          .createSignedUrl(`${userId}/${file.name}`, 3600); 
+          .createSignedUrl(`${userId}/audio/${file.name}`, 3600);  // Changed this path too
 
         if (signedError) {
           console.error('Error getting signed URL:', signedError);
@@ -105,7 +105,7 @@ function App() {
     try {
       const userId = await getUserId()
       const cleanFileName = selectedFile.name.replace(/[^a-zA-Z0-9.-]/g, '_')
-      const uploadPath = `${userId}/${cleanFileName}`
+      const uploadPath = `${userId}/audio/${cleanFileName}`
 
       const { error } = await supabase 
         .storage
