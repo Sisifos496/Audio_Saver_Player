@@ -83,7 +83,6 @@ function App() {
           return;
         }
         currentUserRef.current = user.id
-        // Set email here
         setUserEmail(user.email || 'No email associated with this account')
         downloadListAudioFiles();
       } catch (error) {
@@ -220,9 +219,16 @@ function App() {
     }
   }
 
+  const directToNotes = () => {
+    window.location.href = '/note'
+  }
+
   return (
     <div className='bg-[#22221E]'>
       <div className="flex flex-col justify-center items-center h-screen">
+        <div className='absolute top-4 left-4'>
+          <button onClick={directToNotes}>Notes</button>
+        </div>
         <div className='absolute top-4 right-4 flex flex-col items-end'>
           <p className="text-white">{userEmail}</p>
           <button onClick={logOut} className='mb-[5%] text-white hover:opacity-90'>
