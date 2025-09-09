@@ -50,6 +50,19 @@ function Notes(){
                         Log Out
                     </button>
                 </div>
+                <div className="flex flex-row bg-[#59ADFD] shadow-xl h-[60%] w-[70%] rounded-[10px] text-gray-800">
+                <div className="bg-[#3F82FD] w-[25%] pl-4 pr-4 rounded-[10px]">
+                </div>
+                    <div className="flex flex-col justify-center items-center w-[75%] pl-4 pr-4">
+                        <div className="flex flex-col justify-center items-center w-[20px] mb-4">
+                            <input className="text-sm font-bold p-1 rounded-[4px]" placeholder="Title..."></input>
+                        </div>
+                        <div className="flex flex-col justify-center items-center w-[75%] pl-4 pr-4">
+                            <textarea className="resize-none rounded-[10px] w-[700px] h-[400px] p-3" name="textarea"></textarea>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
